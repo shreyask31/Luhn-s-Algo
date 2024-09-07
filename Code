@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int main() {
+    int arr[16], doubled[16], digit1, digit2, num, sumofarr = 0, sum;
+
+    // Input the 16 digits
+    printf("Enter 16 digits one by one:\n");
+    for (int i = 0; i < 16; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    //-------------------------1---------------------------//
+    // Doubling every second digit from the right
+    for (int i = 15; i >= 0; i--) {
+        if ((15 - i) % 2 == 1) {  // Double every second digit from the right
+            doubled[i] = arr[i] * 2;
+        } else {
+            doubled[i] = arr[i];  // Keep the other digits the same
+        }
+    }
+
+    //-------------------------2---------------------------//
+    // Summing digits for numbers greater than 9
+    for (int i = 0; i < 16; i++) {
+        if (doubled[i] > 9) {
+            num = doubled[i];
+            digit1 = num % 10;  // To get Last digit
+            digit2 = num / 10;  // To get First digit
+            sum = digit1 + digit2;
+            doubled[i] = sum;  // Replace the value with the sum of its digits
+        }
+    }
+
+    //-------------------------3---------------------------//
+    // Summing all the digits in array
+    for (int i = 0; i < 16; i++) {
+        sumofarr += doubled[i];
+    }
+
+    //-------------------------4---------------------------//
+    // Checking the validity of the card number
+    if (sumofarr % 10 == 0) {
+        printf("Valid card number\n");
+    }
+    else
+    {
+        printf("Invalid Card Number");
+    }
+return 0;
+}
